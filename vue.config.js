@@ -4,7 +4,9 @@ let cwd = process.cwd();
 const basePath = path.join(cwd, 'mock');
 
 let config = {
-	devServer: {},
+	devServer: {
+    
+  },
 };
 
 module.exports = config;

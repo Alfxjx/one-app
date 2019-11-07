@@ -1,22 +1,58 @@
 <template>
-  <div class="index-page">this is one-app web-client</div>
+  <div class="index-page">
+    <!-- 抬头 -->
+    <div class="header"></div>
+    <!-- 每日一文卡片 -->
+    <div class="card" @click="gotoLink">
+      <!-- 文章信息 -->
+      <div class="title">{{response.title}}</div>
+      <div class="info">
+        <div class="author">{{response.author}}</div>
+        <div class="tags" v-if="response.tags">
+          <span v-for="(item,index) in response.tags" :key="index">{{item}}</span>
+        </div>
+      </div>
+      <!-- 简介&link -->
+      <div class="description">{{response.description}}</div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { fetchRequest } from "../http/request";
+import { fetchGet } from "../http/request";
 
 @Component
 export default class Index extends Vue {
-  created() {
-    // fetchRequest({method:'get',url:'/mock/getArticle.json'}).then((res:any)=>{
-    //   console.log(res.data);
-    // });
+  private response = {
+    title: "",
+    author: "",
+    tags: [],
+    description: "",
+    link: ""
+  };
+  private created() {
+    this._getArticle();
+  }
+
+  private _getArticle() {
+    fetchGet("getArticleApi", {}).then((res: any) => {
+      if (res.returnCode * 1 !== 0) {
+        console.log("err code");
+      } else {
+        this.response = res.data;
+      }
+    });
+  }
+
+  private gotoLink() {
+    console.log("跳转");
+    // window.location.href = this.response.link;
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .index-page {
   text-align: center;
 }
