@@ -21,6 +21,10 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 export default class CardItem extends Vue {
   @Prop()
   public info: any;
+  private gotoLink() {
+    console.log("跳转");
+    // window.location.href = this.response.link;
+  }
 }
 </script>
 
