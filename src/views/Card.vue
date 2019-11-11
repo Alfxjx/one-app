@@ -2,10 +2,10 @@
   <div class="card-wrapper">
     <ul class="card-list">
       <li class="card" v-for="(item,index) in cards" :key="index" :style="[transform(index)]">
-        <!-- <div class="content">{{item}}</div> -->
         <card-item :info="item"></card-item>
       </li>
     </ul>
+    <!-- <card-item :info="cards[0]"></card-item> -->
   </div>
 </template>
 
@@ -51,11 +51,12 @@ export default class Card extends Vue {
 
 <style lang='scss' scoped>
 .card-wrapper {
-  width: 320px;
-  height: 320px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .card-list {
-    width: 100%;
-    height: 100%;
     perspective: 1000px; //子元素视距
     perspective-origin: 50% 150%; //子元素透视位置
     // -webkit-perspective: 1000px;
@@ -64,23 +65,14 @@ export default class Card extends Vue {
     padding: 0;
     position: relative;
     .card {
-      background: #ea3;
-      border: 1px solid #000;
-      height: 100%;
-      width: 100%;
-      border-radius: 4px;
-      text-align: center;
-      overflow: hidden;
+      width: 280px;
+      height: 300px;
       position: absolute;
-      display: -webkit-flex;
+      left: -130px;
+      top: -150px;
       display: flex;
-      flex-direction: column;
       user-select: none;
       pointer-events: auto;
-      .content {
-        width: 100px;
-        height: 100px;
-      }
     }
   }
 }
